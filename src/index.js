@@ -1,5 +1,6 @@
 const Websocket = require("ws")
 const port = process.env.PORT || 3000
+let soma=1;
 const wss = new Websocket.Server({port:port},()=>{
 console.log("Server started!");
 })
@@ -21,7 +22,7 @@ wss.on('connection',(ws)=>{
 
         // Monta o objeto com as informações recebida do cliente
         obj.playerName = b.playerName+'(Server)'+port;
-        obj.lives = b.lives*2;
+        obj.lives = soma;
         obj.health = b.health;
         console.log(obj);
         
@@ -33,7 +34,7 @@ wss.on('connection',(ws)=>{
         // envia para o cliente
        
         ws.send(strData);
-        
+        soma++
     })
 })
 
